@@ -4,7 +4,7 @@ const shorten_input=document.getElementById("shorten_input");
 // get the area where the shortened links will be posted
 let post_area=document.getElementById("shorten_url") ;
 
-   mohamed=JSON.parse(window.localStorage.getItem("btn_copy_id"))
+   mohamed=JSON.parse(window.localStorage.getItem("btn_copy_id"))|| [];
 // initialize an empty array to store local storage
 let local_store_arry=[];
 let btn_copied_id=[]
@@ -18,7 +18,7 @@ let params={
 // check if there is already local storage
 if(window.localStorage.getItem("shorten_url")){
     // parse the local storage and store it in the local_store_arry
-    local_store_arry=JSON.parse(window.localStorage.getItem("shorten_url"));
+    local_store_arry=JSON.parse(window.localStorage.getItem("shorten_url")) || [];
     // loop through the local_store_arry and add each item to the post_area
     for(let i=0;i<local_store_arry.length;i++){
         post_area.innerHTML+=`
@@ -90,7 +90,7 @@ copy_buttons.forEach((ele) => {
          e.currentTarget.style.disabled=false;
         // store the id of the copied button in the btn_copied_id array
         e.currentTarget.id=e.currentTarget.parentElement.id;
-        btn_copied_id=JSON.parse(window.localStorage.getItem("btn_copy_id"))
+        btn_copied_id=JSON.parse(window.localStorage.getItem("btn_copy_id"))|| [];
         btn_copied_id.push(e.currentTarget.parentElement.id)    
         window.localStorage.setItem("btn_copy_id", JSON.stringify(btn_copied_id));
     }); 
@@ -98,7 +98,7 @@ copy_buttons.forEach((ele) => {
 
 // loop through all the copy buttons and check if their id is in the btn_copied_id array
 window.addEventListener("DOMContentLoaded", () => {
-  const btn_copy_id = JSON.parse(window.localStorage.getItem("btn_copy_id"));
+  const btn_copy_id = JSON.parse(window.localStorage.getItem("btn_copy_id")) || [];
    document.querySelectorAll(".right .tool .btn").forEach((ele)=>{
         for(let i=0;i<btn_copy_id.length;i++){
            
